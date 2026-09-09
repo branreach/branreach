@@ -81,3 +81,27 @@ export function formatFollowers(count: number): string {
   }
   return count.toLocaleString("ko-KR");
 }
+
+export function formatDate(value: string | null): string {
+  if (!value) return "-";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "-";
+  return d.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+export function formatDateRange(
+  start: string | null,
+  end: string | null,
+): string {
+  if (!start && !end) return "미정";
+  return `${formatDate(start)} ~ ${formatDate(end)}`;
+}
+
+export function formatBudget(value: number | null): string {
+  if (value == null) return "미정";
+  return `${value.toLocaleString("ko-KR")}원`;
+}
