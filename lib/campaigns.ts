@@ -50,6 +50,43 @@ export async function listCampaigns(
   return (data ?? []) as CampaignWithBrand[];
 }
 
+export type BrandCampaign = Campaign & { applications: { count: number }[] };
+
+/** 현재 브랜드가 등록한 캠페인만 (지원자 수 포함). */
+export async function listBrandCampaigns(): Promise<BrandCampaign[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (!profile) return [];
+
+  const { data: brand } = await supabase
+    .from("brands")
+    .select("id")
+    .eq("profile_id", profile.id)
+    .maybeSingle();
+  if (!brand) return [];
+
+  const { data, error } = await supabase
+    .from("campaigns")
+    .select("*, applications(count)")
+    .eq("brand_id", brand.id)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as BrandCampaign[];
+}
+
+export function applicantCount(c: BrandCampaign): number {
+  return c.applications?.[0]?.count ?? 0;
+}
+
 export async function getCampaign(
   id: string,
 ): Promise<CampaignWithBrand | null> {
