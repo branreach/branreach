@@ -59,7 +59,7 @@ supabase/migrations/ SQL 마이그레이션
 
 ## 구현 진행 (PRD §32)
 
-- [x] **Phase 1 — Foundation**: Supabase 연결, Auth, 스키마, RLS, 역할 라우팅, 레이아웃
+- [x] **Phase 1 — Foundation**: Supabase 연결, Auth, 스키마, RLS, 역할 라우팅, 레이아웃 — API 레벨 검증 완료 (가입 트리거 / RLS / 연락처 격리 / 중복지원 / 권한)
 - [ ] Phase 2 — Landing
 - [ ] Phase 3 — Influencer
 - [ ] Phase 4 — Brand
