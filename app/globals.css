@@ -128,6 +128,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* 한국어 단어가 줄바꿈에서 중간에 쪼개지지 않도록 */
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
   html {
     @apply font-sans;
