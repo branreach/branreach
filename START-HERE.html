@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branreach — 프로젝트 현황</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --ink: #17171a;
+    --muted: #6b6b72;
+    --line: #e5e5e2;
+    --accent: #1a1a1a;
+    --ok: #15803d;
+    --ok-bg: #f0fdf4;
+    --wait: #b45309;
+    --wait-bg: #fffbeb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+      "Malgun Gothic", "맑은 고딕", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
+  header { margin-bottom: 40px; }
+  h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .tag { color: var(--muted); font-size: 14px; }
+  .updated { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  h2 { font-size: 15px; margin: 0 0 16px; }
+  p { margin: 0 0 12px; }
+
+  .phases { display: flex; flex-direction: column; gap: 8px; }
+  .phase {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 9px; background: var(--bg);
+    font-size: 14px;
+  }
+  .phase .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    background: var(--line);
+  }
+  .phase.done .dot { background: var(--ok); }
+  .phase.wait .dot { background: var(--wait); }
+  .phase .label { flex: 1; }
+  .phase .state { font-size: 12px; color: var(--muted); }
+  .phase.done .state { color: var(--ok); }
+  .phase.wait .state { color: var(--wait); }
+
+  ol { margin: 0; padding-left: 20px; }
+  ol li { margin-bottom: 6px; }
+
+  code, kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  .cmd {
+    display: block; background: #1a1a1a; color: #f5f5f5;
+    padding: 12px 14px; border-radius: 9px; margin: 8px 0;
+    overflow-x: auto; white-space: pre; cursor: pointer;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  .cmd:hover { outline: 2px solid #3a3a3a; }
+  .hint { font-size: 12px; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; }
+  td code { background: var(--bg); padding: 2px 5px; border-radius: 4px; }
+
+  a { color: #0b5cff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .links a { display: inline-block; margin-right: 18px; }
+
+  .badge {
+    display: inline-block; font-size: 11px; padding: 2px 8px;
+    border-radius: 999px; font-weight: 600;
+  }
+  .badge.ok { background: var(--ok-bg); color: var(--ok); }
+  .badge.wait { background: var(--wait-bg); color: var(--wait); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } }
+  .mini {
+    background: var(--bg); border-radius: 9px; padding: 12px 14px; font-size: 13px;
+  }
+  .mini b { display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Branreach</h1>
+    <div class="tag">한국 브랜드 × 중국 인플루언서 — 크로스보더 인플루언서 매칭 플랫폼 MVP</div>
+    <div class="updated">이 페이지는 수동 갱신입니다 · 마지막 갱신 2026-09-10</div>
+  </header>
+
+  <section>
+    <h2>진행 현황</h2>
+    <div class="phases">
+      <div class="phase done"><span class="dot"></span><span class="label">Phase 1 — Foundation (Next.js · Supabase · Auth · 스키마 · RLS · 역할 라우팅)</span><span class="state">완료</span></div>
+      <div class="phase done"><span class="dot"></span><span class="label">Phase 2 — Landing (Hero · 역할 CTA · 실 DB 통계 · How it works)</span><span class="state">완료</span></div>
+      <div class="phase done"><span class="dot"></span><span class="label">Phase 3 — Influencer (프로필 · 대시보드 · 캠페인 탐색 · 지원 · 지원 내역)</span><span class="state">완료</span></div>
+      <div class="phase done"><span class="dot"></span><span class="label">Phase 4 — Brand (브랜드 정보 · 대시보드 · 인플루언서 풀 · 캠페인 CRUD · 지원자 관리)</span><span class="state">완료</span></div>
+      <div class="phase wait"><span class="dot"></span><span class="label">Phase 5 — Admin (대시보드 · 관리 화면 · 수동 매칭)</span><span class="state">코드 완료 · 검증 대기</span></div>
+      <div class="phase"><span class="dot"></span><span class="label">Phase 6 — QA + 배포 (권한 테스트 · 모바일 · Vercel)</span><span class="state">예정</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>브라우저에서 보기</h2>
+    <p>웹앱이라 더블클릭으로 여는 파일은 없습니다. 개발 서버를 켜야 합니다.</p>
+    <ol>
+      <li>파일 탐색기에서 <code>C:\Users\leeta\Desktop\Branreach\web</code> 폴더로 이동</li>
+      <li>주소창에 <kbd>cmd</kbd> 입력 후 Enter (그 폴더에서 터미널 열림)</li>
+      <li>아래 명령 실행 (첫 실행만 <code>npm install</code> 필요)</li>
+    </ol>
+    <span class="cmd" onclick="sel(this)">npm install
+npm run dev</span>
+    <p style="margin-top:14px">그다음 브라우저에서 열기 →
+      <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+    </p>
+    <p class="hint">이미 서버가 떠 있으면 <code>npm run dev</code> 는 "port 3000 in use" 로 뜹니다. 그냥 위 주소로 접속하면 됩니다.</p>
+  </section>
+
+  <section>
+    <h2>테스트 계정</h2>
+    <table>
+      <thead><tr><th>역할</th><th>이메일</th><th>비밀번호</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>인플루언서</td><td><code>inf.ui.1@branreach-test.com</code></td><td><code>Test1234pw</code></td><td>프로필 작성됨 · 캠페인 1건 지원</td></tr>
+        <tr><td>브랜드</td><td><code>brand.demo.1788983060287@branreach-test.com</code></td><td><code>Test1234pw</code></td><td>글로우서울 · 캠페인 4개</td></tr>
+        <tr><td>운영자</td><td><code>admin@branreach-test.com</code></td><td><code>Admin1234pw</code></td><td>⚠ 승격 SQL 실행 전엔 brand 로 로그인됨</td></tr>
+      </tbody>
+    </table>
+    <p class="hint" style="margin-top:12px">직접 새로 가입해도 됩니다. 데이터 초기화는 Supabase SQL Editor 에서
+      <code>delete from auth.users where email like '%@branreach-test.com';</code></p>
+  </section>
+
+  <section>
+    <h2>확인해볼 흐름</h2>
+    <div class="grid2">
+      <div class="mini"><b>인플루언서</b>가입 → 프로필 작성 → 캠페인 찾기(필터) → 지원(자율입력 성과 + "미검증" 문구) → 지원 내역</div>
+      <div class="mini"><b>브랜드</b>가입 → 브랜드 정보 → 캠페인 등록 → 내 캠페인 → 지원자 관리(선정/미선정) → 인플루언서 풀(연락처 안 보임 확인)</div>
+      <div class="mini"><b>역할 분리</b>인플루언서 계정으로 <code>/brand/...</code> 접근 시 리다이렉트</div>
+      <div class="mini"><b>모바일</b>브라우저 창 좁혀서 카드/네비 확인</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>주요 링크</h2>
+    <div class="links">
+      <a href="https://supabase.com/dashboard/project/grgofykfeusvsexutepp" target="_blank">Supabase 대시보드</a>
+      <a href="https://supabase.com/dashboard/project/grgofykfeusvsexutepp/sql/new" target="_blank">SQL Editor</a>
+      <a href="https://github.com/branreach/branreach" target="_blank">GitHub 레포</a>
+      <a href="http://localhost:3000" target="_blank">로컬 앱</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>배포 체크리스트 (Phase 6)</h2>
+    <ol>
+      <li>Vercel 에서 GitHub 레포 <code>branreach/branreach</code> import</li>
+      <li><b>Root Directory 를 <code>web</code> 로 설정</b> (앱이 <code>web/</code> 하위에 있음)</li>
+      <li>Vercel 환경변수 입력:
+        <code>NEXT_PUBLIC_SUPABASE_URL</code>,
+        <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>,
+        <code>NEXT_PUBLIC_SITE_URL</code> (배포 도메인)</li>
+      <li>Supabase → Authentication → URL Configuration: Site URL + Redirect URL 에 배포 도메인 추가</li>
+      <li>Supabase → Authentication → Email: "Confirm email" 다시 ON</li>
+      <li>배포 후 production 에서 3대 흐름 재확인 (인플루언서 / 브랜드 / 운영자 매칭)</li>
+    </ol>
+    <p class="hint">service_role 키는 필요 없습니다 — Admin 은 RLS <code>is_admin()</code> 로 동작합니다.</p>
+  </section>
+
+  <section>
+    <h2>검증 상태</h2>
+    <table>
+      <tbody>
+        <tr><td>인플루언서 전체 흐름</td><td><span class="badge ok">로컬 검증됨</span></td></tr>
+        <tr><td>브랜드 전체 흐름 (연락처 격리 포함)</td><td><span class="badge ok">로컬 검증됨</span></td></tr>
+        <tr><td>RLS (연락처 격리 · 권한 · 중복지원 · 매칭 admin전용)</td><td><span class="badge ok">API 검증됨</span></td></tr>
+        <tr><td>운영자 대시보드 · 관리 · 수동 매칭</td><td><span class="badge wait">코드 완료 · 검증 대기</span></td></tr>
+        <tr><td>아바타 / 로고 이미지 업로드</td><td><span class="badge wait">직접 테스트 권장</span></td></tr>
+        <tr><td>비밀번호 재설정 이메일</td><td><span class="badge wait">배포 후 확인</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<script>
+  function sel(el) {
+    const r = document.createRange();
+    r.selectNodeContents(el);
+    const s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    try { document.execCommand('copy'); } catch (e) {}
+  }
+</script>
+</body>
+</html>
