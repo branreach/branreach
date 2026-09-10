@@ -122,19 +122,22 @@
   </section>
 
   <section>
-    <h2>브라우저에서 보기</h2>
-    <p>웹앱이라 더블클릭으로 여는 파일은 없습니다. 개발 서버를 켜야 합니다.</p>
-    <ol>
-      <li>파일 탐색기에서 <code>C:\Users\leeta\Desktop\Branreach\web</code> 폴더로 이동</li>
-      <li>주소창에 <kbd>cmd</kbd> 입력 후 Enter (그 폴더에서 터미널 열림)</li>
-      <li>아래 명령 실행 (첫 실행만 <code>npm install</code> 필요)</li>
-    </ol>
-    <span class="cmd" onclick="sel(this)">npm install
-npm run dev</span>
-    <p style="margin-top:14px">그다음 브라우저에서 열기 →
-      <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+    <h2>웹사이트 실행하기</h2>
+    <p>
+      <b>Branreach 폴더의 <code>웹사이트-실행.cmd</code> 를 더블클릭하세요.</b>
+      검은 창이 뜨고 잠시 후 브라우저가 <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> 으로 자동으로 열립니다.
     </p>
-    <p class="hint">이미 서버가 떠 있으면 <code>npm run dev</code> 는 "port 3000 in use" 로 뜹니다. 그냥 위 주소로 접속하면 됩니다.</p>
+    <ul class="hint" style="padding-left:18px; line-height:1.9">
+      <li>첫 실행은 패키지 설치 때문에 수 분 걸립니다. 이후엔 10초 내외.</li>
+      <li>페이지가 바로 안 뜨면 2~3초 후 새로고침.</li>
+      <li>서버를 끄려면 그 검은 창을 닫으면 됩니다.</li>
+      <li>"이 앱이 PC 변경..." 같은 경고가 뜨면 실행 허용.</li>
+      <li>Node.js 가 없다면 먼저 <a href="https://nodejs.org" target="_blank">nodejs.org</a> 에서 LTS 설치.</li>
+    </ul>
+    <p class="hint" style="margin-top:12px">
+      터미널로 직접 하려면: <code>C:\Users\leeta\Desktop\Branreach\web</code> 폴더에서
+      <code>npm install</code> → <code>npm run dev</code>
+    </p>
   </section>
 
   <section>
