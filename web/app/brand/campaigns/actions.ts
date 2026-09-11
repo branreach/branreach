@@ -72,6 +72,7 @@ function buildPayload(fd: FormData) {
   return {
     payload: {
       title,
+      cover_image_url: text(fd, "cover_image_url") || null,
       product_name: text(fd, "product_name") || null,
       category: text(fd, "category") || null,
       description: text(fd, "description") || null,

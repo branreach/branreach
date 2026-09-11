@@ -22,6 +22,17 @@ export function CampaignDetail({ campaign }: { campaign: CampaignWithBrand }) {
 
   return (
     <div className="space-y-6">
+      {c.cover_image_url ? (
+        <div className="overflow-hidden rounded-xl border">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={c.cover_image_url}
+            alt=""
+            className="aspect-[16/9] w-full object-cover"
+          />
+        </div>
+      ) : null}
+
       <div>
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-muted-foreground">

@@ -103,6 +103,19 @@ export function CampaignFilters() {
         </SelectContent>
       </Select>
 
+      <Select
+        value={params.get("sort") ?? "latest"}
+        onValueChange={(v) => setParam("sort", v === "latest" ? "" : v)}
+      >
+        <SelectTrigger className="ml-auto w-32" size="sm">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="latest">최신순</SelectItem>
+          <SelectItem value="deadline">마감임박순</SelectItem>
+        </SelectContent>
+      </Select>
+
       {hasFilters ? (
         <Button
           variant="ghost"

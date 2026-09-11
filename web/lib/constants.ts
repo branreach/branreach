@@ -105,3 +105,23 @@ export function formatBudget(value: number | null): string {
   if (value == null) return "미정";
   return `${value.toLocaleString("ko-KR")}원`;
 }
+
+/**
+ * 모집 마감까지 D-day 배지 라벨. 마감일이 없으면 null (배지 미표시).
+ * 오늘 자정 기준으로 계산한다.
+ */
+export function recruitDeadlineLabel(
+  recruitEndDate: string | null,
+): { label: string; urgent: boolean } | null {
+  if (!recruitEndDate) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const end = new Date(recruitEndDate);
+  if (Number.isNaN(end.getTime())) return null;
+  end.setHours(0, 0, 0, 0);
+
+  const days = Math.round((end.getTime() - today.getTime()) / 86_400_000);
+  if (days < 0) return { label: "마감", urgent: false };
+  if (days === 0) return { label: "오늘 마감", urgent: true };
+  return { label: `D-${days}`, urgent: days <= 3 };
+}

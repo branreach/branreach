@@ -34,6 +34,7 @@ export default async function InfluencerCampaignsPage({
     maxMinFollowers: sp.followers ? Number(sp.followers) || undefined : undefined,
     status:
       sp.status === "closed" || sp.status === "all" ? sp.status : "recruiting",
+    sort: sp.sort === "deadline" ? "deadline" : "latest",
   };
 
   const campaigns = await listCampaigns(filters);
@@ -54,7 +55,7 @@ export default async function InfluencerCampaignsPage({
           조건에 맞는 캠페인이 없습니다.
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {campaigns.map((c) => (
             <CampaignCard
               key={c.id}

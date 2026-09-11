@@ -11,26 +11,27 @@ export type CampaignBrand = {
   logo_url: string | null;
 };
 
-export type CampaignWithBrand = Campaign & { brands: CampaignBrand | null };
+export type CampaignWithBrand = Campaign & {
+  brands: CampaignBrand | null;
+  applications: { count: number }[];
+};
 
 export type CampaignFilters = {
   category?: string;
   compensation?: CompensationType;
   maxMinFollowers?: number;
   status?: "recruiting" | "closed" | "all";
+  sort?: "latest" | "deadline";
 };
 
-const SELECT = "*, brands(id, brand_name, logo_url)";
+const SELECT = "*, brands(id, brand_name, logo_url), applications(count)";
 
 /** 인플루언서용 캠페인 목록. RLS 로 draft 는 자동 제외된다. */
 export async function listCampaigns(
   filters: CampaignFilters = {},
 ): Promise<CampaignWithBrand[]> {
   const supabase = await createClient();
-  let query = supabase
-    .from("campaigns")
-    .select(SELECT)
-    .order("created_at", { ascending: false });
+  let query = supabase.from("campaigns").select(SELECT);
 
   const status = filters.status ?? "recruiting";
   if (status === "recruiting") query = query.eq("status", "recruiting");
@@ -45,9 +46,24 @@ export async function listCampaigns(
   if (filters.maxMinFollowers)
     query = query.lte("minimum_followers", filters.maxMinFollowers);
 
+  if (filters.sort === "deadline") {
+    query = query
+      .order("recruit_end_date", { ascending: true, nullsFirst: false })
+      .order("created_at", { ascending: false });
+  } else {
+    query = query.order("created_at", { ascending: false });
+  }
+
   const { data, error } = await query;
   if (error) throw error;
   return (data ?? []) as CampaignWithBrand[];
+}
+
+/** 캠페인의 지원자 수. */
+export function campaignApplicantCount(c: {
+  applications: { count: number }[];
+}): number {
+  return c.applications?.[0]?.count ?? 0;
 }
 
 export type BrandCampaign = Campaign & { applications: { count: number }[] };

@@ -187,6 +187,7 @@ export type Database = {
           recruit_end_date: string | null;
           collab_start_date: string | null;
           collab_end_date: string | null;
+          cover_image_url: string | null;
           status: CampaignStatus;
         } & Timestamps;
         Insert: {
@@ -209,6 +210,7 @@ export type Database = {
           recruit_end_date?: string | null;
           collab_start_date?: string | null;
           collab_end_date?: string | null;
+          cover_image_url?: string | null;
           status?: CampaignStatus;
           created_at?: string;
           updated_at?: string;

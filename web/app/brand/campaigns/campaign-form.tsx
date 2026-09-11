@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 
 import { ChipToggleGroup } from "@/components/chip-toggle-group";
+import { ImageUpload } from "@/components/image-upload";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -67,6 +68,9 @@ export function CampaignForm({
   const [creatorCategories, setCreatorCategories] = useState<string[]>(
     campaign?.creator_categories ?? [],
   );
+  const [coverImage, setCoverImage] = useState<string | null>(
+    campaign?.cover_image_url ?? null,
+  );
   const [publish, setPublish] = useState(
     campaign ? campaign.status === "recruiting" : true,
   );
@@ -81,6 +85,20 @@ export function CampaignForm({
 
       <section className="space-y-5">
         <h2 className="text-sm font-semibold">기본 정보</h2>
+        <Field label="대표 이미지">
+          <ImageUpload
+            bucket="campaign-images"
+            name="cover_image_url"
+            value={coverImage}
+            onChange={setCoverImage}
+            shape="square"
+            label="대표 이미지"
+          />
+          <p className="text-xs text-muted-foreground">
+            인플루언서가 캠페인 목록에서 보는 카드 이미지입니다. 없으면 기본
+            플레이스홀더가 표시됩니다.
+          </p>
+        </Field>
         <Field label="캠페인 제목 *" htmlFor="title">
           <Input
             id="title"
