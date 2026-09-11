@@ -4,3 +4,4 @@ Thumbs.db
 
 # 앱 코드는 web/ 하위에서 자체 .gitignore 로 관리
 # (web/.gitignore 가 node_modules, .next, .env*.local 등을 처리)
+피쳐링(밴치마킹)/
